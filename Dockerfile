@@ -1,4 +1,4 @@
-FROM luzifer/base-alpine:3.3-1.17.2.0
+FROM quay.io/luzifer/base-alpine:3.3-1.17.2.0
 
 # Install packages
 RUN apk-install nginx \
