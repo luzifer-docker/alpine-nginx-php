@@ -1,5 +1,13 @@
-# alpine-nginx-php
-Alpine Linux Docker image (~54.04 MB) running Nginx and PHP 5.6.14  Image suitable for running in Tutum/Kubernetes style hosted distributed environments. 
+# luzifer-docker / alpine-nginx-php
 
-Image is based on [sillelien/base-alpine](https://hub.docker.com/r/sillelien/base-alpine/) base image which incorporates S6 for process management.
+Run nginx and php-fpm in a Docker container using s6 overlay
 
+## Usage
+
+```bash
+## Build container (optional)
+$ docker build -t luzifer/alpine-nginx-php .
+
+## Execute radicale
+$ docker run --rm -ti -v $(pwd):/var/www -p 80:80 luzifer/alpine-nginx-php
+```

@@ -1,23 +1,17 @@
-FROM quay.io/luzifer/base-alpine:3.3-1.17.2.0
+FROM alpine:3.8
+
+ENV S6VERSION=v1.21.7.0
 
 # Install packages
-RUN apk-install nginx \
-    bash \
-    curl \
-    git \
-    php-cli \
-    php-curl \
-    php-dom \
-    php-gd \
-    php-fpm \
-    php-json \
-    php-mcrypt \
-    php-mysql \
-    php-mysqli \
-    php-pdo_mysql \
-    php-phar \
-    php-openssl && \
-    rm -Rf /var/www/*
+RUN set -ex \
+ && apk --no-cache add \
+      nginx \
+      bash \
+      curl \
+      git \
+      php-fpm \
+ && curl -sSfL "https://github.com/just-containers/s6-overlay/releases/download/${S6VERSION}/s6-overlay-amd64.tar.gz" | tar -xzv -C / \
+ && rm -Rf /var/www/*
 
 # Copy configuration files to root
 COPY rootfs /
@@ -25,8 +19,7 @@ COPY rootfs /
 # Fix permissions
 RUN chown -Rf nginx:www-data /var/www/
 
-# Set working directory
 WORKDIR /var/www
-
-# Expose the ports for nginx
 EXPOSE 80 443
+
+ENTRYPOINT ["/init"]
