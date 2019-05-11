@@ -1,6 +1,6 @@
-FROM alpine:3.8
+FROM alpine:3.9
 
-ENV S6VERSION=v1.21.7.0
+ENV S6VERSION=v1.22.1.0
 
 # Install packages
 RUN set -ex \
